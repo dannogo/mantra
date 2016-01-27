@@ -1,0 +1,339 @@
+<!doctype html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>MANTRA</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+	<script src="js/respond.min.js"></script>
+	<script src="js/data.inc.js"></script>
+	<script src="js/jquery.min.js"></script> 
+	<script src="js/bootstrap.min.js"></script>
+	<style>
+
+	</style>
+</head>
+
+<body>
+<div class="container">
+	<!--
+	<div class="row">
+		<div class="col-xs-12 jum">
+			<div style="float:left">
+				
+			</div>
+			<img src="img/rock_eyes.jpg" alt="фото Глаза Будды" class="img-responsive" style="margin: 0 auto;">
+		</div>
+	</div> 
+	-->
+	
+	<div class="row">
+		<div id="mainPanel" class="col-sm-8 col-md-6 col-md-push-3 col-sm-push-4">
+			<div id="console">
+			</div>
+			<div id="managePanel" class="">
+				<div class="row">
+					<div class="col-xs-1">
+					</div>
+					<div class="col-xs-10">
+						<span id="currentCount">&nbsp;</span><span id="percent1" class="pull-right">&nbsp;</span>
+			            <div class="progress">
+			              <div id="percent2" data-percentage="0%" style="width: 0%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+			            </div>
+
+			            
+			            <!-- <div class="btn-toolbar" role="toolbar">-->
+				            
+				            	
+							   
+								  
+			               	
+
+			            <!-- </div> -->
+			            <table>
+			            	<tr>
+			            		<td>
+				            		<div class="btn-group">
+					            	 <a id="play" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-play"></span></a>
+					            	<!-- <a id="pause" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pause"></span></a> -->
+					            	<a id="stop" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-stop"></span></a>
+					            	<a id="repeat" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-repeat"></span></a><!---->
+						            </div>
+					            </td>
+					            <td>
+					            	&nbsp;
+					            </td>
+			            		<td>
+				            		<div class="input-group" style="float:none">
+								      <div class="input-group-btn">
+								        <button id="modeBtn" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Кол-во <span class="caret"></span></button>
+								        <ul class="dropdown-menu">
+								          	<li><a style="cursor: pointer;" id="modeAlternative">Время </a></li>
+										</ul>
+								      </div> <!-- /btn-group -->
+								      <input id="modeInputArea" type="text" class="form-control" placeholder="раз">
+								    </div><!-- /input-group -->
+							    </td>
+					            
+			            		<td style="padding-left:15px;">
+			            			<input id="range" type="range" class="vHorizon" min='10' max="140">
+			            		</td>
+			            	</tr>
+			            </table>
+			            	
+		            </div>
+		            <div class="col-xs-1">
+					</div>
+		         </div>
+         
+	</div>
+		</div>
+		<div class="col-sm-4 col-md-3 col-sm-pull-8 col-md-pull-6">
+		
+			<div class="panel panel-primary" style="max-width: 300px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-list"></span>Мантры <a href="" target="_blank"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+			<span class="glyphicon glyphicon-picture"></span>
+			</button></a>
+                    </h3>
+                </div>
+                <div class="panel-body" id="mantraListPanel">
+                    <ul class="list-group" id="mantraList">
+                        
+                    </ul>
+                </div>
+                <div class="panel-footer">
+				<!-- <form> -->
+					<input type="text" id="currentMantra" class="btn-block form-control">
+				<!-- </form> -->
+				</div>
+            </div>
+			
+		</div>
+		<div class="well col-md-3 col-xs-12">
+			третий
+		</div>
+	</div>
+
+
+
+</div>
+	<script src="js/lib.inc.js"></script>
+<script type="text/javascript">
+pageConstructor();
+
+function pageConstructor(){
+	loadMantraList();
+	textAreaFocus();
+	blurInputMode();
+	toggleMode();
+	rangeListen();
+	playListen();
+	consoleListen();
+	//playPauseListen();
+}
+
+/*
+
+добавить заставку для пустой консоли логотип и название "Портативный NendroMaker v1.0"
+
+	Портативный NendroMaker v1.0
+	LazyMantra
+
+
+-- включать картинки соответствующие мантрам, и картинку по умолчанию для новых мантр
+-- ползунок для изменения максимальной высоты консоли
+-- сделать проверку на наличие текста и названия данных при добавлении мантры в список 
+-- сделать проверку допустимости вводимых данных в поле ограничений. Только целые положительные числа, иначе красная подсветка
+*/
+/*
+Задачи на сегодняшний день (пятница):
+	-- Интегрировать проверку паузы, реализацию пазуы и снятия с паузы.
+	-- сделать просчет процентов в режиме Время
+	-- сделать полную функциональность для кнопок STOP и REPEAT
+	-- сделать строку состояния, в которой выводить время до окончания(при режиме Время), статус флага Паузы, флага изображения и т п
+*/
+
+/*
+Задачи на субботу:
+	-- Сделать функционал отправки и обработки статистики
+	-- сделать проверку валидности значения ограничения
+	-- сделать проверку наличия данных при добавлении мантры в список
+	-- сделать функционал показа картинок с их скрытием по кнопке
+*/
+
+	
+/*
+
+Объединить кнопки СТАРТ и ПАУЗА. При запуске воспроизведения менять СТАРТ на ПАУЗЕ. Сделать флаг указывающий на текущее назначение кнопки
+
+поставить еще один listener на кнопку PLAY. В функции этого листенера менять иконку и флаг
+
+кнопка СТАРТ 
+	-- если цикл не запущен, запускает его
+	-- если цикл на паузе, удаляет  иначе снимает с паузы (если в качестве паузы работает большой тайм аут, удалить его)
+
+	-- pseudo code begin
+	var pause = false;
+------------ must work begin -----------------
+	
+
+
+	setTimeout(function(){
+		if(!pause){
+			characterIteration();
+		}else{
+			pauseChecker();
+		}
+	}, speed);
+------------ must work end -------------------
+
+
+	// в функции characterIteration();  //
+	--------- prototype begin -------------------
+		setTimeout(function(){
+			if(!pause){
+				characterIteration();
+			}else{
+				setTimeout(function(){
+					if(!pause){
+						characterIteration();
+					}else{
+	
+					}
+				}, speed);
+			}
+		}, speed);
+	---------- ptototype end -------------------
+
+	-- pseudo code end
+
+кнопка СТОП
+	-- сбросить флаг readyForBegining;
+	-- установить флаг
+	-- поставить break в цикле в обоих циклах (break второго уровня), посчитать или взять из счетчика количество полных повторений мантры
+	-- в предварительно созданный глобальный массив или объект добавить название мантры и количество повторений. Если эта мантра включается не в первый раз, добавить колличество повторений к уже имеющемуся значению
+	-- если это мантра без названия, записать ее в массив/объект, вместо ключа поставить unknown1(unknown2, ...). При выводе этой информации на экран, показывать только первые 14 символов и ... (три точки). Такую запись выделять бледным цветом. Если текст какой-нибудь из следующих мантр будет совпадать с анонимной мантрой, записать новую мантру, добавить к количеству повторений количество из анонимной мантры, и удалить эту анонимную мантру
+
+кнопка ПАУЗА
+	-- считает сколько времени до конца оставалось на момент паузы, и сохраняет это значение в переменную
+	-- для паузы сделать timeout, проверяющий состояние флага паузы и запускающий следующий timeout
+
+кнопка ПОВТОР
+	--
+	-- останавливает оба цикла
+	-- отправляет данные в статистику
+	-- запускает ту же мантру с тем же ограничением по колличеству или по времени. Если стоит ограничение по времени, вычисляет новое время, на которое ориентироваться
+
+
+// распознать когда в сработала пауза
+	// возможно вместо флага pause ввести переменную с тремя возможными значениями (stop,play, pause)
+// установить паузу
+// продожить предудыщую мантру, не начиная параллельно нового процесса
+	// проверить работают ли первые три пункта при повторных паузах
+
+// Действия с playStatus при нажатии на play
+// if stop -> play; if play -> pause; if pause ->play
+*/
+
+// проверяет статус паузы каждые 
+function pauseChecker(){
+	console.info('сработал pauseChecker()');
+		setTimeout(function(){
+			if(!pause){
+				console.info('сработал characterIteration()');
+				characterIteration();
+			}else{
+				//pauseChecker();
+			}
+	}, speed);}
+
+
+// Прослушка кнопки play с целью перключения на pause и наоборот
+function playPauseListen(){
+	var playBtn = document.getElementById('play');
+	playBtn.addEventListener('click', playPauseToggle, false);
+}
+
+// Меняет PLAY на PAUSE или наоборот DEPRECATED
+function playPauseToggle(){
+	if(readyForBegining){
+		var playBtn = document.getElementById('play');
+		// меняю флаг
+		if(!pause)
+			pause = true;
+		else
+			pause = false;
+
+		console.info(pause);
+		// Меняю иконку
+		playBtn.firstChild.classList.toggle('glyphicon-play');
+		playBtn.firstChild.classList.toggle('glyphicon-pause');
+	}
+}
+
+function playButtonPressed(){
+	// Сделать проверку на то play этот или pause и поставить соответствующий флаг
+	// ----- Код из playPauseToggle() begin ----------
+	if(readyForBegining){ // если данные получены
+		var playBtn = document.getElementById('play');
+		// if stop -> play; if play -> pause; if pause ->play
+		// меняю статус playState
+		if(playState == 'stop')
+			playState = 'play';
+		else if(playState == 'play')
+			playState = 'pause';
+		else if(playState == 'pause')
+			playState = 'play';
+
+		console.info(playState);
+		// Меняю иконку
+		playBtn.firstChild.classList.toggle('glyphicon-play');
+		playBtn.firstChild.classList.toggle('glyphicon-pause');
+	}
+	// ----- Код из playPauseToggle() end ------------
+
+
+	if(!pause){
+		//startNewLoop();
+		if(getCurrentMantraData()){
+			aimTimestamp = new Date().getTime() + curTimeRestriction*60*1000;
+			multiRows = false;
+
+			mantraIteration();
+		}else{
+			// Пришли не все данные
+		}
+
+	}else{
+		//continueLooping();
+	}
+}
+
+/*
+
+function startNewLoop(){
+	console.info('creating new loop');
+}
+
+function continueLooping(){
+	console.info('continue old loop');
+}
+
+function routingMainOperations(){
+// получение мантры из currentMantra
+//emptyInput
+}
+
+*/
+</script>
+
+ <!--javascript
+	<script src="js/jquery.min.js"></script> 
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script> 
+	<script src="js/bootstrap.min.js"></script>
+	-->
+</body>
+</html>

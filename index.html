@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>MANTRA</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+	<script src="js/respond.min.js"></script>
+	<script src="js/data.inc.js"></script>
+	<script src="js/jquery.min.js"></script> 
+	<script src="js/bootstrap.min.js"></script>
+	<style>
+
+	</style>
+</head>
+
+<body>
+<div class="container">
+	<div class="row hidden" id="pictureRow">
+		<div class="col-xs-12 jum">
+			<div style="float:left">
+				
+			</div>
+			<img src="img/default.jpg" alt="фото Глаза Будды" class="img-responsive" style="margin: 0 auto;">
+		</div>
+	</div> 
+	<!--
+	-->
+	
+	<div class="row">
+		<div id="mainPanel" class="col-sm-8 col-md-6 col-md-push-3 col-sm-push-4">
+			<div id="console">
+				<img src="img/eyes.jpg" alt="фото Глаза Будды" class="img-responsive" style="margin: 0 auto; width: 390px;">
+			</div>
+			<div id="managePanel" class="">
+				<div class="row">
+					<div class="col-xs-1">
+					</div>
+					<div class="col-xs-10">
+						<span id="currentCount">&nbsp;</span><span id="percent1" class="pull-right">&nbsp;</span>
+			            <div class="progress">
+			              <div id="percent2" data-percentage="0%" style="width: 0%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+			            </div>
+			            <!-- Панель управления консолью begin -->
+			            <table>
+			            	<tr>
+			            		<td>
+				            		<div class="btn-group">
+					            	 <a id="play" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-play"></span></a>
+					            	<a id="stop" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-stop"></span></a>
+						            </div>
+					            </td>
+					            <td>
+					            	&nbsp;
+					            </td>
+			            		<td>
+				            		<div class="input-group" style="float:none">
+								      <div class="input-group-btn">
+								        <button id="modeBtn" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Кол-во <span class="caret"></span></button>
+								        <ul class="dropdown-menu">
+								          	<li><a style="cursor: pointer;" id="modeAlternative">Время </a></li>
+										</ul>
+								      </div> <!-- /btn-group -->
+								      <input id="modeInputArea" type="text" class="form-control" placeholder="раз">
+								    </div><!-- /input-group -->
+							    </td>
+					            
+			            		<td style="padding-left:15px;">
+			            			<input id="range" type="range" class="vHorizon" min='10' max="140">
+			            		</td>
+			            	</tr>
+			            </table>
+			            	
+		            </div>
+		            <div class="col-xs-1">
+					</div>
+		         </div>
+         
+	</div>
+		</div>
+		<div class="col-sm-4 col-md-3 col-sm-pull-8 col-md-pull-6">
+		
+			<div class="panel panel-primary" style="max-width: 300px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-list"></span>Мантры <a href="" target="_blank"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+			<span class="glyphicon glyphicon-picture"></span>
+			</button></a>
+                    </h3>
+                </div>
+                <div class="panel-body" id="mantraListPanel">
+                    <ul class="list-group" id="mantraList">
+                        
+                    </ul>
+                </div>
+                <div class="panel-footer">
+				<!-- <form> -->
+					<input type="text" id="currentMantra" class="btn-block form-control">
+				<!-- </form> -->
+				</div>
+            </div>
+			
+		</div>
+		<div class="col-md-3 col-xs-12" style="padding-right:0px">
+			
+            <!-- Панель статистики begin style="max-width: 300px;" -->
+			<div class="panel panel-info hidden" id="statPanel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-stats"></span>Сатистика
+                    </h3>
+                </div>
+                <div class="panel-body" id="">
+                    <ul class="list-group" id="statList">
+                    </ul>
+                </div>
+            </div>
+            <!-- Панель статистики end -->
+		</div>
+	</div>
+
+</div>
+	<script src="js/lib.inc.js"></script>
+<script type="text/javascript">
+pageConstructor();
+
+</script>
+
+</body>
+</html>
